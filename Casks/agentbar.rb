@@ -18,9 +18,7 @@ cask "agentbar" do
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/AgentBar.app"]
   end
 
-  zap trash: [
-    "~/.agentbar",
-  ]
+  zap trash: "~/.agentbar"
 
   caveats <<~EOS
     AgentBar is ad-hoc signed (no Apple notarization); this cask removes the
