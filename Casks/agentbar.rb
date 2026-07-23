@@ -11,13 +11,21 @@ cask "agentbar" do
 
   app "AgentBar.app"
 
+  # Ad-hoc signed (no notarization): clear quarantine so first launch isn't blocked
+  # by Gatekeeper's "cannot verify" dialog. Installing from this tap is the opt-in.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/AgentBar.app"]
+  end
+
   zap trash: [
     "~/.agentbar",
   ]
 
   caveats <<~EOS
-    AgentBar is ad-hoc signed (no Apple notarization). If macOS blocks the first
-    launch, either right-click the app and choose Open, or run:
+    AgentBar is ad-hoc signed (no Apple notarization); this cask removes the
+    quarantine flag after install so the first launch isn't blocked. If macOS
+    still shows "cannot verify" later (e.g. after a manual download), run:
       xattr -dr com.apple.quarantine "/Applications/AgentBar.app"
 
     First launch installs Claude Code hooks into ~/.claude/settings.json.
