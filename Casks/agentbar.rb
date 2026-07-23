@@ -7,7 +7,7 @@ cask "agentbar" do
   desc "One menu bar item for all your AI coding agents"
   homepage "https://github.com/michalstrnadel/AgentBar"
 
-  depends_on macos: ">= :monterey"
+  depends_on macos: :monterey
 
   app "AgentBar.app"
 
