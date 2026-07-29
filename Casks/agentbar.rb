@@ -1,10 +1,10 @@
 cask "agentbar" do
-  version "1.9.0"
-  sha256 "2a75f12275667acb502d0dd482d00f1b0eef9808f027b4301f017dfa145a88fd"
+  version "1.10.0"
+  sha256 "87bf789d8dcfe2e4750223fb59c498b2ecd6a827dc6769cf936ef522be39c30f"
 
   url "https://github.com/michalstrnadel/AgentBar/releases/download/v#{version}/AgentBar.app.zip"
   name "AgentBar"
-  desc "One menu bar item for all your AI coding agents"
+  desc "Menu bar item and Dynamic Island for all your AI coding agents"
   homepage "https://github.com/michalstrnadel/AgentBar"
 
   depends_on macos: :monterey
