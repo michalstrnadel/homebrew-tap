@@ -1,6 +1,6 @@
 cask "agentbar" do
-  version "1.10.1"
-  sha256 "ee57899b544653fb2b795339d2d4ee7d97692faee32ba3ea0289b9f23dc8619b"
+  version "1.10.2"
+  sha256 "0ccf7455021dc7a1aa6affbfbdcea7163019f3b92d085066299c8edd63945d36"
 
   url "https://github.com/michalstrnadel/AgentBar/releases/download/v#{version}/AgentBar.app.zip"
   name "AgentBar"
@@ -11,8 +11,9 @@ cask "agentbar" do
 
   app "AgentBar.app"
 
-  # Ad-hoc signed (no notarization): clear quarantine so first launch isn't blocked
-  # by Gatekeeper's "cannot verify" dialog. Installing from this tap is the opt-in.
+  # Signed with the project's stable certificate but not notarized: clear quarantine
+  # so first launch isn't blocked by Gatekeeper's "cannot verify" dialog. Installing
+  # from this tap is the opt-in.
   postflight do
     system_command "/usr/bin/xattr",
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/AgentBar.app"]
@@ -21,10 +22,14 @@ cask "agentbar" do
   zap trash: "~/.agentbar"
 
   caveats <<~EOS
-    AgentBar is ad-hoc signed (no Apple notarization); this cask removes the
-    quarantine flag after install so the first launch isn't blocked. If macOS
-    still shows "cannot verify" later (e.g. after a manual download), run:
+    AgentBar is signed with the project's certificate but not Apple-notarized;
+    this cask removes the quarantine flag after install so the first launch
+    isn't blocked. If macOS still shows "cannot verify" later (e.g. after a
+    manual download), run:
       xattr -dr com.apple.quarantine "/Applications/AgentBar.app"
+
+    Since 1.10.2 releases share one signing identity, so permissions you grant
+    (e.g. Documents access) survive updates.
 
     First launch installs Claude Code hooks into ~/.claude/settings.json.
     Start a NEW agent session afterwards to see it in the menu bar.
