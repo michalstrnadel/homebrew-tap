@@ -1,6 +1,6 @@
 cask "agentbar" do
-  version "1.11.0"
-  sha256 "6c893afe53c1238e18525dc59316715cdf8a66bcaad35ada2f7d4ab2bf16e00d"
+  version "1.12.0"
+  sha256 "aaf6650b7c5bd41644f3a26c0817ac66ea87190e3f7e157d8fb05ad782e8260a"
 
   url "https://github.com/michalstrnadel/AgentBar/releases/download/v#{version}/AgentBar.app.zip"
   name "AgentBar"
@@ -19,7 +19,13 @@ cask "agentbar" do
                    args: ["-dr", "com.apple.quarantine", "#{appdir}/AgentBar.app"]
   end
 
-  zap trash: "~/.agentbar"
+  # The OpenCode plugin lives outside ~/.agentbar because OpenCode loads plugins
+  # only from its own directory; hook entries merged into other agents' configs
+  # stay for the user to remove (see the README's Uninstall section).
+  zap trash: [
+    "~/.agentbar",
+    "~/.config/opencode/plugins/agentbar.js",
+  ]
 
   caveats <<~EOS
     AgentBar is signed with the project's certificate but not Apple-notarized;
