@@ -14,9 +14,10 @@ cask "agentbar" do
   # Signed with the project's stable certificate but not notarized: clear quarantine
   # so first launch isn't blocked by Gatekeeper's "cannot verify" dialog. Installing
   # from this tap is the opt-in.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/AgentBar.app"]
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args:  ["-dr", "com.apple.quarantine", "AgentBar.app"],
+        chdir: "{{appdir}}"
   end
 
   # The OpenCode plugin lives outside ~/.agentbar because OpenCode loads plugins
