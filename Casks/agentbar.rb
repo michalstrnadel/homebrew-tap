@@ -1,6 +1,6 @@
 cask "agentbar" do
-  version "1.23.0"
-  sha256 "905b1fd6be0447d276215ca1b4851d7b7312dabf0b9e6efb6bf4dca2e5d58e4e"
+  version "1.24.0"
+  sha256 "93baf9d84342826d207d14c575fb43b3d4a41d18814bb40484116caa1df000f0"
 
   url "https://github.com/michalstrnadel/AgentBar/releases/download/v#{version}/AgentBar.app.zip"
   name "AgentBar"
